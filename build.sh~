@@ -1,7 +1,0 @@
-#! /bin/bash
-
-nios2-elf-gcc -O2 -std=c99 -ffunction-sections -fverbose-asm -fno-inline -mhw-mul -mhw-div -DSYSTEM_BUS_WIDTH=32 -DALT_SINGLE_THREADED -Wl,--defsym -Wl,nasys_stack_top=0xE7000000 -Wl,--script=bootloader.ld -o bootloader.elf bootloader.c cache_clear.s sha2.c
-elf2hex --input=bootloader.elf --base=0xE8000000 --end=0xE800ffff --width=32 --output=nios_system_bootloader.hex --no-zero-fill
-
-
-

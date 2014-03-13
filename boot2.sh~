@@ -1,0 +1,7 @@
+#! /bin/bash
+
+nios2-elf-gcc -Os -I ./libtomcrypt-1.17/src/headers/ -I ./libtommath-0.42.0/ -L. test.c -ltomcrypt -ltommath -DLTM_DESC -o boot2.elf
+elf2hex --input=boot2.elf --base=0xE8000000 --end=0xE800ffff --width=32 --output=nios_system_boot2.hex --no-zero-fill
+
+
+

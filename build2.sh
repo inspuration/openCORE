@@ -1,0 +1,4 @@
+#! /bin/bash
+
+#nios2-elf-gcc -s -O2 -I ./libtomcrypt-1.17/src/headers/ -I ./libtommath-0.42.0/ -L. -ltomcrypt -ltommath -DLTM_DESC -std=c99 -ffunction-sections -fverbose-asm -fno-inline -mhw-mul -mhw-div -DSYSTEM_BUS_WIDTH=32 -DALT_SINGLE_THREADED -Wl,--defsym -Wl,nasys_stack_top=0x07ff0000 -Wl,--defsym -Wl,nasys_pprogram_mem=0x0000000 -Wl,--defsym -Wl,nasys_data_mem=0x7ff0000 -Wl,--section-start -Wl,.data=0x07ff0000 -Wl,--section-start -Wl,.text=0x00000000 -Wl,--script=boot2.ld -o bootloader2.elf bootloader2.c sha2.c cache_clear.s
+nios2-elf-gcc -s -O2 -std=c99 -ffunction-sections -fverbose-asm -fno-inline -mhw-mul -mhw-div -DSYSTEM_BUS_WIDTH=32 -DALT_SINGLE_THREADED -Wl,--defsym -Wl,nasys_stack_top=0xE7000000 -Wl,--script=bootloader.ld -I ./libtomcrypt-1.17/src/headers/ -I ./libtommath-0.42.0/ -L. bootloader2.c sha2.c cache_clear.s -ltomcrypt -ltommath -DLTM_DESC -o bootloader2.elf
